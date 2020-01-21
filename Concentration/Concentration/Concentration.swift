@@ -11,7 +11,7 @@ import Foundation
 struct Concentration {
     var cards = [Card]()
     
-    init(numberOfPairsOfCards:Int){
+    init(numberOfPairsOfCards:Int) {
         for _ in 1...numberOfPairsOfCards{
             let card = Card()
             cards += [card, card]

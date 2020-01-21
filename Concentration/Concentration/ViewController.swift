@@ -17,21 +17,34 @@ class ViewController: UIViewController {
     
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards )
     
-    var numberOfPairsOfCards:Int {
+    var numberOfPairsOfCards : Int {
         return (cardButtons.count + 1) / 2
     }
     
-    private(set) var flipCount = 0 {
+    @IBOutlet private weak var flipCountLabel: UILabel!{
         didSet {
-            flipCountLabel.text = "Flips:\(flipCount)"
+            updateFlipCountLabel()
         }
     }
     
+    
+    private(set) var flipCount = 0 {
+        didSet {
+            updateFlipCountLabel()
+        }
+    }
+    
+    private func updateFlipCountLabel(){
+        let attributes:[NSAttributedString.Key:Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor :  #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        ]
+        let attribrtedString = NSAttributedString(string: "Flips:\(flipCount)", attributes: attributes)
+        //            flipCountLabel.text = "Flips:\(flipCount)"
+        flipCountLabel.attributedText = attribrtedString
+    }
+    
     @IBOutlet private var cardButtons: [UIButton]!
-    
-    
-    
-    @IBOutlet private weak var flipCountLabel: UILabel!
     
     @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1
@@ -44,7 +57,6 @@ class ViewController: UIViewController {
         }
         
     }
-    
     
     private func updateViewFromModel(){
         for index in cardButtons.indices{
