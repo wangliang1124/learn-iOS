@@ -20,14 +20,18 @@ class PlayingCardView: UIView {
 //            context.fillPath()
 //        }
         
-        let path = UIBezierPath()
-        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: 100.0, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        path.lineWidth = 5.0
-        UIColor.green.setFill()
-        UIColor.red.setStroke()
-        path.stroke()
-        path.fill()
+//        let path = UIBezierPath()
+//        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: 100.0, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+//        path.lineWidth = 5.0
+//        UIColor.green.setFill()
+//        UIColor.red.setStroke()
+//        path.stroke()
+//        path.fill()
         
+        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: 16.0)
+        roundedRect.addClip()
+        UIColor.white.setFill()
+        roundedRect.fill()
     }
     
 }
