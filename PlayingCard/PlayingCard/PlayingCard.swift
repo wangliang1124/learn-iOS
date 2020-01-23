@@ -22,10 +22,10 @@ enum Suit: String, CustomStringConvertible {
         return rawValue
     }
     
-    case spades = "♠︎"
-    case hearts = "♥︎"
-    case diamonds = "♦︎"
-    case clubs = "♣︎"
+    case spades = "♠️"
+    case hearts = "❤️"
+    case diamonds = "♦️"
+    case clubs = "♣️"
     
     static var all = [Suit.spades, .hearts, .diamonds, .clubs]
 }
