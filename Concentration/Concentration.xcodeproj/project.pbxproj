@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF63980223DCA4F100D6ECE9 /* ConcentrationThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63980123DCA4F100D6ECE9 /* ConcentrationThemeChooserViewController.swift */; };
 		EF785A9323D497110017232C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF785A9223D497110017232C /* AppDelegate.swift */; };
 		EF785A9523D497110017232C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF785A9423D497110017232C /* SceneDelegate.swift */; };
-		EF785A9723D497110017232C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF785A9623D497110017232C /* ViewController.swift */; };
+		EF785A9723D497110017232C /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF785A9623D497110017232C /* ConcentrationViewController.swift */; };
 		EF785A9A23D497110017232C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF785A9823D497110017232C /* Main.storyboard */; };
 		EF785A9C23D497120017232C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF785A9B23D497120017232C /* Assets.xcassets */; };
 		EF785A9F23D497120017232C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF785A9D23D497120017232C /* LaunchScreen.storyboard */; };
@@ -18,10 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF63980123DCA4F100D6ECE9 /* ConcentrationThemeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooserViewController.swift; sourceTree = "<group>"; };
 		EF785A8F23D497110017232C /* Concentration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concentration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF785A9223D497110017232C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF785A9423D497110017232C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EF785A9623D497110017232C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF785A9623D497110017232C /* ConcentrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
 		EF785A9923D497110017232C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF785A9B23D497120017232C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF785A9E23D497120017232C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,8 +64,9 @@
 			children = (
 				EF785A9223D497110017232C /* AppDelegate.swift */,
 				EF785A9423D497110017232C /* SceneDelegate.swift */,
-				EF785A9623D497110017232C /* ViewController.swift */,
+				EF785A9623D497110017232C /* ConcentrationViewController.swift */,
 				EF785A9823D497110017232C /* Main.storyboard */,
+				EF63980123DCA4F100D6ECE9 /* ConcentrationThemeChooserViewController.swift */,
 				EF785AA623D4BB340017232C /* Concentration.swift */,
 				EF785AA823D4BC890017232C /* Card.swift */,
 				EF785A9B23D497120017232C /* Assets.xcassets */,
@@ -144,10 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF785A9723D497110017232C /* ViewController.swift in Sources */,
+				EF785A9723D497110017232C /* ConcentrationViewController.swift in Sources */,
 				EF785AA723D4BB340017232C /* Concentration.swift in Sources */,
 				EF785AA923D4BC8A0017232C /* Card.swift in Sources */,
 				EF785A9323D497110017232C /* AppDelegate.swift in Sources */,
+				EF63980223DCA4F100D6ECE9 /* ConcentrationThemeChooserViewController.swift in Sources */,
 				EF785A9523D497110017232C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
