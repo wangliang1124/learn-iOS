@@ -12,7 +12,7 @@
         <scene sceneID="xEz-sq-Gd9">
             <objects>
                 <viewController id="cYN-fq-4Cs" customClass="ConcentrationThemeChooserViewController" customModule="Concentration" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cdp-BA-I1h" customClass="c">
+                    <view key="view" contentMode="scaleToFill" id="cdp-BA-I1h" userLabel="View" customClass="c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -24,7 +24,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Sports"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="showDetail" identifier="Choose Theme" id="Qfr-oq-doE"/>
+                                            <action selector="changeTheme:" destination="cYN-fq-4Cs" eventType="touchUpInside" id="aMj-IZ-3mf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba1-wf-djA">
@@ -32,7 +32,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Faces"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="showDetail" identifier="Choose Theme" id="8sM-OM-fG7"/>
+                                            <action selector="changeTheme:" destination="cYN-fq-4Cs" eventType="touchUpInside" id="nyM-8s-iwa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3R-RR-A2q">
@@ -40,7 +40,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Animals"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="showDetail" identifier="Choose Theme" id="VkM-bx-dKc"/>
+                                            <action selector="changeTheme:" destination="cYN-fq-4Cs" eventType="touchUpInside" id="c7v-Qg-yLf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -54,6 +54,9 @@
                         <viewLayoutGuide key="safeArea" id="DTP-C1-sck"/>
                     </view>
                     <navigationItem key="navigationItem" id="zJX-PI-4Gc"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="Choose Theme" id="9hQ-z8-wOP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wlv-yQ-vqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,8 +76,8 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-Q1-aYh">
-                                <rect key="frame" x="16" y="102" width="736" height="220"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-Q1-aYh">
+                                <rect key="frame" x="16" y="0.0" width="736" height="220"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-o0-jx8">
                                         <rect key="frame" x="0.0" y="0.0" width="736" height="68"/>
@@ -307,6 +310,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NHT-eg-A2u"/>
+        <segue reference="9hQ-z8-wOP"/>
     </inferredMetricsTieBreakers>
 </document>
