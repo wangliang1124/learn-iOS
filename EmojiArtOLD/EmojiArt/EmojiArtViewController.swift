@@ -51,32 +51,48 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         }
     }
     
-    @IBAction func save(_ sender: UIBarButtonItem) {
-        if let json = emojiArt?.json {
-            //            if let jsonString = String(data: json, encoding: .utf8) {
-            //                print(jsonString)
-            //            }
-            var url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            if url?.appendPathComponent("Untitled.json") != nil {
-                do {
-                    try json.write(to: url!)
-                    print("save successfully")
-                } catch let error {
-                    print("could't save \(error)")
-                }
-            }
+    var document: EmojiArtDocument?
+    
+    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
+        document?.emojiArt = emojiArt
+        if document?.emojiArt != nil {
+            document?.updateChangeCount(.done)
+        }
+    }
+    
+    
+    @IBAction func close(_ sender: UIBarButtonItem) {
+        save()
+        
+        if document?.emojiArt != nil {
+            document?.thumbnail = emojiArtView.snapshot
+        }
+        
+        dismiss(animated: true) {
+            self.document?.close()
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        var url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        if url?.appendPathComponent("Untitled.json") != nil {
-            if let jsonData = try? Data(contentsOf: url!) {
-                emojiArt = EmojiArt(json: jsonData)
+        document?.open { success in
+            if success {
+                self.title = self.document?.localizedName
+                self.emojiArt = self.document?.emojiArt
             }
         }
     }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        var url = try? FileManager.default.url(for: .applicationDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//        url = url?.appendingPathComponent("Untitled.json")
+//        if url != nil {
+//            document = EmojiArtDocument(fileURL: url!)
+//        } else {
+//
+//        }
+//    }
     
     // MARK: - Storyboard
     
