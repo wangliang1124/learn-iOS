@@ -48,3 +48,63 @@ if spClass1 == spClass2 {// false
 if spClass1 !== spClass2 {// true
     print("引用不相同的类实例 \(spClass2)")
 }
+
+protocol Copyable {
+    func copy() -> Self
+    func clamp(intervalToClamp: Self) -> Self
+}
+
+class A: Copyable {
+    var num = 1
+    
+    required init() {
+
+    }
+    
+    func copy() -> Self {
+        let type1 = type(of: self)
+        print(type1)
+        let result = type1.init()
+        result.num = num
+        return result
+    }
+    
+    func clamp(intervalToClamp: A) -> Self {
+        let result = type(of: self).init()
+        result.num = num
+        return result
+    }
+    
+    class func calssFunc() -> Self {
+        let type = self
+        print(type)
+        let result = type.init()
+        return result
+    }
+    
+}
+
+class B: A {
+    func clamp(intervalToClamp: B) -> Self {
+        let result = type(of: self).init()
+        result.num = num
+        return result
+    }
+}
+
+let type1 = A.self
+print("type1",A.self)
+type1.calssFunc()
+
+let typeB = B.self
+typeB.calssFunc()
+
+let objectA = A()
+objectA.num = 100
+
+let newObjectA = objectA.copy()
+objectA.num = 1
+
+let objectB = B()
+objectB.num = 100
+let newB = objectB.copy()

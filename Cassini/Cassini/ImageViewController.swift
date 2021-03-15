@@ -13,6 +13,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         didSet {
             image = nil
             if view.window != nil {
+                print("didSet")
                 fetchImage()
             }
         }
@@ -32,6 +33,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("viewDidAppear")
         if imageView.image == nil {
             fetchImage()
         }
@@ -53,6 +55,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     var imageView = UIImageView()
     
     private func fetchImage() {
+        print("fetch")
         if let url = imageURL {
             let urlContents = try? Data(contentsOf: url)
             if let imageData = urlContents {
@@ -63,6 +66,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         if imageURL == nil {
             imageURL = DemoURLs.stanford
         }

@@ -21,7 +21,15 @@ extension EmojiArt.EmojiInfo {
     }
 }
 
-class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    @IBAction func close(bySegue: UIStoryboard) {
+        close()
+    }
     
     // MARK: - Model
     
@@ -61,14 +69,13 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     }
     
     
-    @IBAction func close(_ sender: UIBarButtonItem) {
+    @IBAction func close(_ sender: UIBarButtonItem? = nil) {
         save()
-        
         if document?.emojiArt != nil {
             document?.thumbnail = emojiArtView.snapshot
         }
         
-        dismiss(animated: true) {
+        presentingViewController?.dismiss(animated: true) {
             self.document?.close()
         }
     }
@@ -102,7 +109,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         }
     }
     
-    var emojiArtView = EmojiArtView()
+    var emojiArtView = EmojiArtView(frame: CGRect(origin: CGPoint(x: 0, y: 0) , size: CGSize(width:200, height:200)))
     
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
@@ -110,7 +117,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.maximumZoomScale = 5.0
-            scrollView.minimumZoomScale = 0.1
+            scrollView.minimumZoomScale = 1
             scrollView.delegate = self
             scrollView.addSubview(emojiArtView)
         }
@@ -120,7 +127,6 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         scrollViewHeight.constant = scrollView.contentSize.height
         scrollViewWidth.constant = scrollView.contentSize.width
     }
-    
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return emojiArtView
@@ -167,11 +173,11 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         emojiCollectionView.reloadSections(IndexSet(integer: 0))
     }
     
+    // MARK: - UICollectionViewDataSource
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
-    // MARK: - UICollectionViewDropDelegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
@@ -223,7 +229,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         }
     }
     
-    // MARK: UICollectionViewDragDelegate
+    // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let inputCell = cell as? TextFieldCollectionViewCell {
@@ -305,7 +311,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     // MARK: UIDropInteractionDelegate
     
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: NSURL.self) && session.canLoadObjects(ofClass: UIImage.self)
+        return true //session.canLoadObjects(ofClass: NSURL.self) && session.canLoadObjects(ofClass: UIImage.self)
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {

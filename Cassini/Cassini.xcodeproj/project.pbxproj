@@ -39,6 +39,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF18AA8E23E7C52700482476 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF63981323DDFA0100D6ECE9 /* SceneDelegate.swift */,
+				EF63981123DDFA0100D6ECE9 /* AppDelegate.swift */,
+				EF63981A23DDFA0300D6ECE9 /* Assets.xcassets */,
+				EF63981C23DDFA0300D6ECE9 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EF63980523DDFA0100D6ECE9 = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +69,10 @@
 		EF63981023DDFA0100D6ECE9 /* Cassini */ = {
 			isa = PBXGroup;
 			children = (
-				EF63982523DDFA8E00D6ECE9 /* ImageViewController.swift */,
-				EF63981123DDFA0100D6ECE9 /* AppDelegate.swift */,
-				EF63981323DDFA0100D6ECE9 /* SceneDelegate.swift */,
-				EF63982723DF0F3400D6ECE9 /* DemoURLs.swift */,
 				EF63981723DDFA0100D6ECE9 /* Main.storyboard */,
-				EF63981A23DDFA0300D6ECE9 /* Assets.xcassets */,
-				EF63981C23DDFA0300D6ECE9 /* LaunchScreen.storyboard */,
+				EF63982523DDFA8E00D6ECE9 /* ImageViewController.swift */,
+				EF63982723DF0F3400D6ECE9 /* DemoURLs.swift */,
+				EF18AA8E23E7C52700482476 /* Supporting Files */,
 				EF63981F23DDFA0300D6ECE9 /* Info.plist */,
 			);
 			path = Cassini;

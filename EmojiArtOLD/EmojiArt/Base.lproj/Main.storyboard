@@ -21,6 +21,7 @@
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wV2-LS-Lg4">
                                         <rect key="frame" x="-8" y="30" width="704" height="730"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="250" constant="730" id="BBg-nq-KiD"/>
                                             <constraint firstAttribute="width" priority="250" constant="704" id="FXS-Re-dQg"/>

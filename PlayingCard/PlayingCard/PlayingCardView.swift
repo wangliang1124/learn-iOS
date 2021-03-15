@@ -12,7 +12,9 @@ import UIKit
 class PlayingCardView: UIView {
     
     @IBInspectable var rank: Int = 5 { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    
     @IBInspectable var suit: String = "❤️" { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    
     var isFaceUp = true { didSet { setNeedsDisplay(); setNeedsLayout() }}
     
     var faceCardScale: CGFloat = SizeRadio.faceCardImageSizeToBoundsSize {
@@ -177,7 +179,7 @@ extension CGRect {
         return CGRect(x: minX, y: minY, width: width/2, height: height)
     }
     var rightHalf: CGRect {
-        return CGRect(x: minX, y: minY, width: width/2, height: height)
+        return CGRect(x: minX+width/2, y: minY, width: width/2, height: height)
     }
     func inset(by size: CGSize) -> CGRect {
         return insetBy(dx: size.width, dy: size.height)

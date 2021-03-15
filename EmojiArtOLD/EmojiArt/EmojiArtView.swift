@@ -10,7 +10,7 @@ import UIKit
 
 class EmojiArtView: UIView, UIDropInteractionDelegate {
     override init(frame: CGRect) {
-        super.init(frame:frame)
+        super.init(frame: frame)
         setup()
     }
     
@@ -34,7 +34,7 @@ class EmojiArtView: UIView, UIDropInteractionDelegate {
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: NSAttributedString.self, completion: { providers in
             let dropPoint = session.location(in: self)
-            for attributedString in providers as? [NSAttributedString] ?? []{
+            for attributedString in providers as? [NSAttributedString] ?? [] {
                 self.addLabel(with: attributedString, centeredAt: dropPoint)
             }
         })

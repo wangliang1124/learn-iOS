@@ -43,6 +43,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF18AA8F23E7E53200482476 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF785AB623D7FD380017232C /* AppDelegate.swift */,
+				EF785AB823D7FD380017232C /* SceneDelegate.swift */,
+				EF785ABF23D7FD390017232C /* Assets.xcassets */,
+				EF785AC123D7FD390017232C /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EF785AAA23D7FD380017232C = {
 			isa = PBXGroup;
 			children = (
@@ -62,15 +73,12 @@
 		EF785AB523D7FD380017232C /* PlayingCard */ = {
 			isa = PBXGroup;
 			children = (
-				EF785AB623D7FD380017232C /* AppDelegate.swift */,
-				EF785AB823D7FD380017232C /* SceneDelegate.swift */,
+				EF785ABC23D7FD380017232C /* Main.storyboard */,
 				EF785ABA23D7FD380017232C /* ViewController.swift */,
 				EF6178B623D7FD9E00B3C4EF /* PlayingCard.swift */,
 				EF6178B823D804CD00B3C4EF /* PlayingCardDeck.swift */,
 				EF6178BA23D858AE00B3C4EF /* PlayingCardView.swift */,
-				EF785ABC23D7FD380017232C /* Main.storyboard */,
-				EF785ABF23D7FD390017232C /* Assets.xcassets */,
-				EF785AC123D7FD390017232C /* LaunchScreen.storyboard */,
+				EF18AA8F23E7E53200482476 /* Supporting Files */,
 				EF785AC423D7FD390017232C /* Info.plist */,
 			);
 			path = PlayingCard;

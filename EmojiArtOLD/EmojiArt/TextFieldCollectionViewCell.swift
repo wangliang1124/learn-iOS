@@ -28,4 +28,8 @@ class TextFieldCollectionViewCell: UICollectionViewCell, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        return true
+//    }
 }

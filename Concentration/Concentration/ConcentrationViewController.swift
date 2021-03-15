@@ -38,9 +38,9 @@ class ConcentrationViewController: VCLLoggingViewController {
     }
     
     private func updateFlipCountLabel(){
-        let attributes:[NSAttributedString.Key:Any] = [
+        let attributes: [NSAttributedString.Key: Any] = [
             .strokeWidth : 5.0,
-            .strokeColor :  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         ]
         let attribrtedString = NSAttributedString(string: "Flips:\(flipCount)", attributes: attributes)
         //            flipCountLabel.text = "Flips:\(flipCount)"
@@ -61,11 +61,11 @@ class ConcentrationViewController: VCLLoggingViewController {
         
     }
     
-    private func updateViewFromModel(){
+    private func updateViewFromModel() {
         if cardButtons == nil {
             return
         }
-        for index in cardButtons.indices{
+        for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
@@ -78,7 +78,7 @@ class ConcentrationViewController: VCLLoggingViewController {
         }
     }
     
-    var theme:String? {
+    var theme: String? {
         didSet {
             emojiChoices = theme ?? ""
             emoji = [:]
@@ -90,7 +90,7 @@ class ConcentrationViewController: VCLLoggingViewController {
     
     private var emoji = [Card: String]()
     
-    private func emoji(for card:Card) -> String {
+    private func emoji(for card: Card) -> String {
         if emoji[card] == nil, emojiChoices.count > 0 {
             let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
             emoji[card] = String(emojiChoices.remove(at: randomStringIndex))

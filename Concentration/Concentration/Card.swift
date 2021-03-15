@@ -28,7 +28,7 @@ struct Card: Hashable {
     
     private static var indentifierFactory = 0
     
-    private static func getUniqueIdentifier()->Int{
+    private static func getUniqueIdentifier() -> Int {
         indentifierFactory += 1
         return indentifierFactory
     }
