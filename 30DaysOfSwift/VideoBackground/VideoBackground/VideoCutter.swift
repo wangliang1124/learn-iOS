@@ -12,17 +12,19 @@ class VideoCutter: NSObject {
     func cropVideoWithUrl(videoUrl url: URL, startTime: CGFloat, duration: CGFloat, completion:((_ videoPath: URL?, _ error: NSError?) -> Void)?){
         let asset = AVURLAsset(url: url)
         let exportSession = AVAssetExportSession(asset: asset, presetName: "AVAssetExportPresetHighestQuality")
-        let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
+//        let paths: NSArray =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
         
-        var outputURL = paths.object(at: 0) as! String
         let manager = FileManager.default
-        do {
-            try manager.createDirectory(atPath: outputURL, withIntermediateDirectories: true)
-        } catch _ {
-            
-        }
+//        let path = manager.urls(for: .itemReplacementDirectory, in: .userDomainMask).first
+//        var outputURL = paths.object(at: 0) as! String
         
-        outputURL = (outputURL as NSString).appendingPathComponent("output.mp4")
+//        do {
+//            try manager.createDirectory(atPath: outputURL, withIntermediateDirectories: true)
+//        } catch _ {
+//
+//        }
+        
+        let outputURL = manager.temporaryDirectory.appendingPathComponent("output.mp4").path //(outputURL as NSString).appendingPathComponent("output.mp4")
         
         do {
             try manager.removeItem(atPath: outputURL)
