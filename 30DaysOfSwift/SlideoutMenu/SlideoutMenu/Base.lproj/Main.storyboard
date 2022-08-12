@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reveal View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="bdm-Jx-C8k" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="UQD-mm-iyd"/>
+                        <segue destination="yln-Tm-x6w" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="ohF-4w-8mu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="121"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ju1-6W-aUG">
+            <objects>
+                <navigationController id="bdm-Jx-C8k" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hDE-w8-nZd"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R2j-9l-eeC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3Qi-86-YLz" kind="relationship" relationship="rootViewController" id="edG-Sw-ZEo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vog-Hw-q3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="586" y="826"/>
+        </scene>
+        <!--Back Table View Controller-->
+        <scene sceneID="XDq-Ab-Ozg">
+            <objects>
+                <viewController id="yln-Tm-x6w" customClass="BackTableViewController" customModule="SlideoutMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yDo-bd-lVt" customClass="UITableView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Article" translatesAutoresizingMaskIntoConstraints="NO" id="6CF-Xh-R2d">
+                                <rect key="frame" x="9" y="125" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6CF-Xh-R2d" id="nR2-DE-OIY">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="QZ5-oh-wMj" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="kSF-2F-PLE"/>
+                                </connections>
+                            </tableViewCell>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DJN-52-k9G"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rn5-EL-x4r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="121"/>
+        </scene>
+        <!--Channel View Controller-->
+        <scene sceneID="dRH-5k-UPF">
+            <objects>
+                <viewController id="QZ5-oh-wMj" customClass="ChannelViewController" customModule="SlideoutMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5lS-gS-3FP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="article" translatesAutoresizingMaskIntoConstraints="NO" id="sVp-4s-VNm">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FNc-ZS-9jd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sVp-4s-VNm" firstAttribute="top" secondItem="FNc-ZS-9jd" secondAttribute="top" id="GN0-Lx-jVh"/>
+                            <constraint firstItem="FNc-ZS-9jd" firstAttribute="trailing" secondItem="sVp-4s-VNm" secondAttribute="trailing" id="hbq-qJ-4Pe"/>
+                            <constraint firstItem="FNc-ZS-9jd" firstAttribute="bottom" secondItem="sVp-4s-VNm" secondAttribute="bottom" id="i0B-S1-T68"/>
+                            <constraint firstItem="sVp-4s-VNm" firstAttribute="leading" secondItem="FNc-ZS-9jd" secondAttribute="leading" id="zL3-KT-jBB"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EiL-I4-cDd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2674" y="-521"/>
+        </scene>
+        <!--Friend Read View Controller-->
+        <scene sceneID="Zuw-IX-Z5J">
+            <objects>
+                <viewController id="3Qi-86-YLz" customClass="FriendReadViewController" customModule="SlideoutMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S4X-BW-z8K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Feed" translatesAutoresizingMaskIntoConstraints="NO" id="Cdp-jN-2px">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aAv-d9-ZDp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Cdp-jN-2px" firstAttribute="top" secondItem="aAv-d9-ZDp" secondAttribute="top" id="CMn-ae-rBt"/>
+                            <constraint firstItem="aAv-d9-ZDp" firstAttribute="trailing" secondItem="Cdp-jN-2px" secondAttribute="trailing" id="Cts-Db-bcj"/>
+                            <constraint firstItem="aAv-d9-ZDp" firstAttribute="bottom" secondItem="Cdp-jN-2px" secondAttribute="bottom" id="DvS-wP-TIr"/>
+                            <constraint firstItem="Cdp-jN-2px" firstAttribute="leading" secondItem="aAv-d9-ZDp" secondAttribute="leading" id="SKc-l3-DdY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="C6z-BI-XOG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Glk-jv-Nty" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="994"/>
+        </scene>
+        <!--Read Later View Controller-->
+        <scene sceneID="VBs-ub-3PW">
+            <objects>
+                <viewController id="zLF-LK-cLE" customClass="ReadLaterViewController" customModule="SlideoutMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cd2-4p-X3I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="readlater" translatesAutoresizingMaskIntoConstraints="NO" id="A43-O5-3le">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mfk-kk-NBL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A43-O5-3le" firstAttribute="leading" secondItem="mfk-kk-NBL" secondAttribute="leading" id="6z4-rI-GV0"/>
+                            <constraint firstItem="mfk-kk-NBL" firstAttribute="trailing" secondItem="A43-O5-3le" secondAttribute="trailing" id="hrG-jy-2gF"/>
+                            <constraint firstItem="mfk-kk-NBL" firstAttribute="bottom" secondItem="A43-O5-3le" secondAttribute="bottom" id="xms-zf-2Vb"/>
+                            <constraint firstItem="A43-O5-3le" firstAttribute="top" secondItem="mfk-kk-NBL" secondAttribute="top" id="zcF-BQ-cTm"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7JK-ur-YfJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2797" y="329"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Feed" width="375" height="667"/>
+        <image name="article" width="375" height="667"/>
+        <image name="readlater" width="375" height="667"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
