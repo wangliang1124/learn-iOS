@@ -21,10 +21,11 @@ class UI: UIView {
         return label
     }()
     
-    private let playBtn: UIButton = {
+    private lazy var playBtn: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Play", for: UIControl.State.normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        //        btn.setTitle("Play", for: UIControl.State.normal)
+        btn.setImage(UIImage(named: "play"), for: .normal)
+        //        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(play), for: .touchUpInside)
@@ -32,10 +33,11 @@ class UI: UIView {
         return btn
     }()
     
-    private let pauseBtn: UIButton = {
+    private lazy var  pauseBtn: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Pause", for: UIControl.State.normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        //        btn.setTitle("Pause", for: UIControl.State.normal)
+        btn.setImage(UIImage(named: "pause"), for: .normal)
+        //        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         btn.backgroundColor = .green
         btn.isEnabled = false
         btn.alpha = 0.5
@@ -44,17 +46,17 @@ class UI: UIView {
         return btn
     }()
     
-    private let resetBtn: UIButton = {
+    private lazy var resetBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("reset", for: UIControl.State.normal)
         btn.titleLabel?.font =  UIFont.systemFont(ofSize: 18)
         btn.setTitleColor(.orange, for: .normal)
-//        btn.contentHorizontalAlignment = .fill
-//        btn.contentVerticalAlignment = .fill
-//        btn.imageView?.contentMode = .scaleAspectFit
-//        btn.setImage(UIImage(named: "reset"), for: .normal)
-//        btn.imageView?.translatesAutoresizingMaskIntoConstraints = false
-//        btn.imageView?.backgroundColor = .gray
+        //        btn.contentHorizontalAlignment = .fill
+        //        btn.contentVerticalAlignment = .fill
+        //        btn.imageView?.contentMode = .scaleAspectFit
+        //        btn.setImage(UIImage(named: "reset"), for: .normal)
+        //        btn.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        //        btn.imageView?.backgroundColor = .gray
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(reset), for: .touchUpInside)
         return btn
@@ -62,17 +64,12 @@ class UI: UIView {
     
     private var counter: Float = 0.0 {
         didSet {
-            timeLabel.text = String(format: "%.1f", counter)
+            timeLabel.text = String(format: "%.2f", counter)
         }
     }
     
     var timer: Timer? = Timer()
     
-//    convenience init() {
-//        let frame = UIScreen.main.bounds
-//        self.init(frame: frame)
-//    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -92,25 +89,25 @@ class UI: UIView {
         timeLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         
-       
+        
         resetBtn.topAnchor.constraint(equalTo: timeLabel.topAnchor, constant: 10).isActive = true
         resetBtn.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: -18).isActive = true
-//        resetBtn.widthAnchor.constraint(equalToConstant: 160).isActive = true
-//        resetBtn.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        //        resetBtn.widthAnchor.constraint(equalToConstant: 160).isActive = true
+        //        resetBtn.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-//        resetBtn.imageView?.topAnchor.constraint(equalTo: resetBtn.topAnchor).isActive = true
-//        resetBtn.imageView?.bottomAnchor.constraint(equalTo: resetBtn.bottomAnchor).isActive = true
-//        resetBtn.imageView?.rightAnchor.constraint(equalTo: resetBtn.centerXAnchor).isActive = true
-//        resetBtn.imageView?.widthAnchor.constraint(equalToConstant: 24).isActive = true
-//        resetBtn.imageView?.heightAnchor.constraint(equalToConstant: 24).isActive = true
-       
+        //        resetBtn.imageView?.topAnchor.constraint(equalTo: resetBtn.topAnchor).isActive = true
+        //        resetBtn.imageView?.bottomAnchor.constraint(equalTo: resetBtn.bottomAnchor).isActive = true
+        //        resetBtn.imageView?.rightAnchor.constraint(equalTo: resetBtn.centerXAnchor).isActive = true
+        //        resetBtn.imageView?.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        //        resetBtn.imageView?.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
         
         
         NSLayoutConstraint.activate([
             playBtn.topAnchor.constraint(equalTo: timeLabel.bottomAnchor),
             playBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             playBtn.trailingAnchor.constraint(equalTo: self.centerXAnchor),
-            playBtn.heightAnchor.constraint(equalToConstant: 100),
+            playBtn.heightAnchor.constraint(equalToConstant: 150),
         ])
         
         NSLayoutConstraint.activate([
@@ -127,8 +124,26 @@ class UI: UIView {
     
     @objc func play(){
         print("play")
+        // method 1
+        // timer =  Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer(fireAt: Date.distantFuture, interval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
+        
+        if let t = timer {
+            // method 2
+            //            RunLoop.main.add(t, forMode: .common)
+            
+            
+            // method 3
+            Thread(block: {
+                RunLoop.current.add(t, forMode: .common)
+                RunLoop.current.run()
+            }).start()
+            
+            t.fireDate = Date.distantPast // start timer
+        }
+        
         playBtn.isEnabled = false
         pauseBtn.isEnabled = true
         playBtn.alpha = 0.5
@@ -162,7 +177,9 @@ class UI: UIView {
     
     
     @objc func updateTimer() {
-        counter += 0.1
+        DispatchQueue.main.sync {
+            counter += 0.1
+        }
     }
 }
 
