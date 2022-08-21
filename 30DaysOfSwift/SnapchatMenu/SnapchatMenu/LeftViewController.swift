@@ -11,7 +11,9 @@ import UIKit
 class LeftViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = UIImageView(image: UIImage(named: "left"))
+        let imageView = UIImageView(frame: self.view.frame)
+        imageView.image = UIImage(named: "left")
+//        let imageView = UIImageView(image: UIImage(named: "left"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
 //        imageView.backgroundColor = .yellow
         

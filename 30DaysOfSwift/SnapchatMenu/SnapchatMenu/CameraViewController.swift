@@ -5,87 +5,117 @@
 //  Created by 王亮 on 2022/6/29.
 //
 
-import Foundation
-import UIKit
 import AVFoundation
+import UIKit
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var captureSession: AVCaptureSession?
-    var stillImageOutput : AVCapturePhotoOutput?
-    var previewLayer : AVCaptureVideoPreviewLayer?
+class CameraViewController: UIViewController, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate {
+    var captureSession: AVCaptureSession!
+
+    var stillImageOutput: AVCapturePhotoOutput?
+
     var cameraView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.frame = UIScreen.main.bounds
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-            
-            imagePicker.allowsEditing = true
-            imagePicker.cameraCaptureMode = .photo
-        } else {
-            imagePicker.sourceType = .photoLibrary
-        }
-        
-        
-        self.view.addSubview(imagePicker.view)
-        self.view.backgroundColor = .darkGray
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            imagePicker.sourceType = .camera
+//
+//            imagePicker.allowsEditing = true
+//            imagePicker.cameraCaptureMode = .photo
+//        } else {
+//            imagePicker.sourceType = .photoLibrary
+//        }
+
+        let captureBtn = UIButton()
+        captureBtn.setImage(UIImage(named: "takePhoto"), for: .normal)
+        captureBtn.addTarget(self, action: #selector(takePhoto), for: .touchUpInside)
+ 
+        captureBtn.frame.size = CGSize(width: 48, height: 48)
+        captureBtn.center.x = view.center.x
+        captureBtn.frame.origin.y = view.frame.height - 100
+
+        view.addSubview(cameraView)
+        view.addSubview(captureBtn)
+        view.backgroundColor = .darkGray
+        
+        startCaptureSession()
+    }
+
+    func startCaptureSession() {
         captureSession = AVCaptureSession()
-        captureSession?.sessionPreset = AVCaptureSession.Preset.hd1920x1080
-        let deviceSession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-        let backCamera = deviceSession.devices.first!
+        captureSession.sessionPreset = .photo // AVCaptureSession.Preset.hd1920x1080
+        //        let deviceSession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+
+        //        guard let backCamera = deviceSession.devices.first else {
+        //            return
+        //        }
+
+        guard let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
+            return
+        }
+
         // 已经不能再使用了
         // let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        var error : NSError?
+        var error: NSError?
         var input: AVCaptureDeviceInput!
 
         do {
-            input = try AVCaptureDeviceInput(device: backCamera) }
-        catch let error1 as NSError {
-            error = error1
+            input = try AVCaptureDeviceInput(device: backCamera)
+        } catch let err as NSError {
+            error = err
             input = nil
         }
 
-        if (error == nil && captureSession?.canAddInput(input) != nil) {
+        if error == nil && captureSession.canAddInput(input) {
+            captureSession.addInput(input)
 
-            captureSession?.addInput(input)
             stillImageOutput = AVCapturePhotoOutput()
-//            stillImageOutput? = [AVVideoCodecKey : AVVideoCodecJPEG]
 
-            if let stillImageOutputTemp = stillImageOutput {
-                if captureSession?.canAddOutput(stillImageOutputTemp) != nil {
-                    captureSession?.addOutput(stillImageOutputTemp)
-                    if let captureSessionTemp = captureSession {
-                        previewLayer = AVCaptureVideoPreviewLayer(session: captureSessionTemp)
-                        previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
-                        // 已经废弃不用了
-                        // previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
-                        previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                        cameraView.layer.addSublayer(previewLayer!)
-                        captureSession?.startRunning()
-                    }
-                }
+            if let stillImageOutput = stillImageOutput, captureSession.canAddOutput(stillImageOutput) {
+                captureSession.addOutput(stillImageOutput)
+
+                let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
+                previewLayer.frame = cameraView.bounds
+                previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+
+                cameraView.layer.addSublayer(previewLayer)
+
+                captureSession.startRunning()
+            }
+        }
+    }
+
+    @objc func takePhoto(_ sender: Any) {
+        DispatchQueue.main.async { [unowned self] in
+            self.view.layer.opacity = 0
+            UIView.animate(withDuration: 0.25) { [unowned self] in
+                self.view.layer.opacity = 1
             }
         }
 
+        let settingsForMonitoring = AVCapturePhotoSettings()
+        settingsForMonitoring.flashMode = .auto
+//        settingsForMonitoring.isAutoStillImageStabilizationEnabled = true
+        settingsForMonitoring.isHighResolutionPhotoEnabled = false
+        stillImageOutput?.capturePhoto(with: settingsForMonitoring, delegate: self)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-          super.viewDidAppear(animated)
-          
-          previewLayer?.frame = cameraView.bounds
-      }
-      
+
+ 
+    // delegate
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        if let photoSampleBuffer = photoSampleBuffer {
+            let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
+            let image = UIImage(data: photoData!)
+            UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        }
+    }
 }

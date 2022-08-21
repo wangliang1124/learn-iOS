@@ -25,6 +25,9 @@ class ViewController: UIViewController {
         rightViewController.view.frame = CGRect(x: 2 * screenWidth, y: 0, width: screenWidth, height: screenHeight)
 
         let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        scrollView.bounces = false
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.frame = view.bounds
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(leftViewController.view)
@@ -37,7 +40,7 @@ class ViewController: UIViewController {
 //        view.addConstraintsForSubviewWithSameSize(scrollView)
         view.backgroundColor = .gray
         
-        
+       
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
