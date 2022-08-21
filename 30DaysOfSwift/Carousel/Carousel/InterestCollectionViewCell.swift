@@ -18,7 +18,7 @@ class InterestCollectionViewCell: UICollectionViewCell {
     
     
     var blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffect = UIBlurEffect(style: .regular)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         visualEffectView.translatesAutoresizingMaskIntoConstraints = false
         return visualEffectView
@@ -62,8 +62,9 @@ class InterestCollectionViewCell: UICollectionViewCell {
 //            featuredImageView.widthAnchor.constraint(equalToConstant: 300),
 //            featuredImageView.heightAnchor.constraint(equalToConstant: 400),
             blurEffectView.heightAnchor.constraint(equalToConstant: 60),
-            blurEffectView.leadingAnchor.constraint(equalTo: featuredImageView.leadingAnchor),
-            blurEffectView.trailingAnchor.constraint(equalTo: featuredImageView.trailingAnchor),
+//            blurEffectView.leadingAnchor.constraint(equalTo: featuredImageView.leadingAnchor),
+//            blurEffectView.trailingAnchor.constraint(equalTo: featuredImageView.trailingAnchor),
+            blurEffectView.widthAnchor.constraint(equalTo: featuredImageView.widthAnchor),
 //            blurEffectView.widthAnchor.constraint(equalTo: featuredImageView.widthAnchor),
             blurEffectView.bottomAnchor.constraint(equalTo: featuredImageView.bottomAnchor),
             interestTitleLabel.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor),
