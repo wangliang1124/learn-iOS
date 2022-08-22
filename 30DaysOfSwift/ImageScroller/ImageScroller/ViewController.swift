@@ -12,7 +12,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let scrollView = UIScrollView()
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .blue
         return scrollView
     }()
     
@@ -20,7 +19,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let imageView = UIImageView(image: UIImage(named: "steve"))
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-       
         return imageView
     }()
     
@@ -37,9 +35,24 @@ class ViewController: UIViewController, UIScrollViewDelegate {
 //        scrollView.frame = UIScreen.main.bounds
         scrollView.delegate = self
         scrollView.addSubview(imageView)
+        
+        let bgImageView = UIImageView(image: UIImage(named: "steve"))
+        bgImageView.translatesAutoresizingMaskIntoConstraints = false
+        let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.isOpaque = false
+        
+        view.addSubview(bgImageView)
+        view.addSubview(blurEffectView)
         view.addSubview(scrollView)
         
          NSLayoutConstraint.activate([
+            bgImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            bgImageView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -77,6 +90,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         scrollView.maximumZoomScale = 3.0
         scrollView.zoomScale = minScale
         print("minScale:\(minScale)")
+        
+        updateConstraintsForSize(view.bounds.size) // for oritation chanage
     }
     
     // UIScollViewDelegate
