@@ -44,11 +44,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         playBtn.addTarget(self, action: #selector(play), for: .touchUpInside)
-        playBtn.layer.zPosition = 1
+//        playBtn.layer.zPosition = 1
         view.addSubview(playBtn)
         view.backgroundColor = .clear
         
-        view.layer.addSublayer(gradientLayer)
+       
         
         
         NSLayoutConstraint.activate([
@@ -58,6 +58,14 @@ class ViewController: UIViewController {
     }
     
     @objc func play(){
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+            audioPlayer.stop()
+            return
+        }
+        
+        
         if let musicFile = Bundle.main.path(forResource: "Ecstasy", ofType: "mp3") {
             let music = URL(fileURLWithPath: musicFile)
             do {
@@ -86,7 +94,8 @@ class ViewController: UIViewController {
             gradientLayer.startPoint = CGPoint(x: 0, y: 0)
             gradientLayer.endPoint = CGPoint(x: 1, y: 1)
             
-           
+            view.layer.addSublayer(gradientLayer)
+            view.bringSubviewToFront(playBtn)
         }
     }
     
