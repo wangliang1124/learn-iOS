@@ -11,7 +11,7 @@ class WelcomeViewController: UIViewController {
     let usernameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "username"
-        textField.layer.cornerRadius = 5
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -20,19 +20,19 @@ class WelcomeViewController: UIViewController {
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "password"
-        textField.layer.cornerRadius = 5
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     let loginButton: UIButton = {
-        var configuration = UIButton.Configuration.bordered()
-        configuration.title = "Login"
-        configuration.background.backgroundColor = .green
+        var configuration = UIButton.Configuration.gray()
+        configuration.baseBackgroundColor = UIColor(red: 22/255.0, green: 139/255.0, blue: 3/255.0, alpha: 1)
+        configuration.baseForegroundColor = .white
         configuration.cornerStyle = .medium
+        configuration.title = "Login"
         let btn = UIButton(configuration: configuration)
-        
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -44,7 +44,8 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = UIColor(red: 25/255.0, green: 153/255.0, blue: 3/255.0, alpha: 1)
+        self.view.alpha = 0
         
         view.addSubview(usernameTextField)
         view.addSubview(passwordTextField)
@@ -85,7 +86,7 @@ class WelcomeViewController: UIViewController {
             self.centerAlignUsername.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil)
-        
+ 
         UIView.animate(withDuration: 0.5, delay: 0.10, options: .curveEaseOut, animations: {
             self.centerAlignPassword.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
@@ -100,14 +101,18 @@ class WelcomeViewController: UIViewController {
     
     @objc
     func loginButtonDidTouch(_ sender: UIButton){
-        let bounds = self.loginButton.bounds
-        
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
             
-            self.loginButton.bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width + 60, height: bounds.size.height)
+            self.loginButton.bounds.size.width += 60
             self.loginButton.isEnabled = false
             
         }, completion: { finished in self.loginButton.isEnabled = true })
+    }
+}
+
+extension WelcomeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
 }
 

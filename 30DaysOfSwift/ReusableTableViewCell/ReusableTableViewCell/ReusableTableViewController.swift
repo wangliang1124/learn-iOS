@@ -14,6 +14,10 @@ var tableData = ["Read 3 article on Medium", "Cleanup bedroom", "Go for a run", 
 class ReusableTableViewController: UITableViewController {
     static var cellIdentifier = "tableCell"
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
