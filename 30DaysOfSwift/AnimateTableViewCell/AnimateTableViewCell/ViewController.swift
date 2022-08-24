@@ -24,17 +24,6 @@ class ViewController: UITableViewController {
     }
     
     func animateTable() {
-//        self.tableView.reloadData()
-//        
-//        let cells = tableView.visibleCells
-//        let tableHeight: CGFloat = tableView.bounds.size.height
-//        
-//        for (index, cell) in cells.enumerated() {
-//            cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
-//            UIView.animate(withDuration: 1.0, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-//                cell.transform = CGAffineTransform(translationX: 0, y: 0);
-//            }, completion: nil)
-//        }
         self.tableView.reloadData()
         
         let cells = tableView.visibleCells
@@ -43,7 +32,7 @@ class ViewController: UITableViewController {
         for (index, cell) in cells.enumerated() {
             cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
             UIView.animate(withDuration: 1.0, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-                cell.transform = CGAffineTransform(translationX: 0, y: 0)
+                cell.transform = .identity
             }, completion: nil)
         }
     }
@@ -74,12 +63,19 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = colorForIndex(indexPath.row)
+        
+//        let tableHeight = tableView.bounds.size.height
+//        cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
+//        UIView.animate(withDuration: 1.0, delay: 0.05 * Double(indexPath.row), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
+//            cell.transform = CGAffineTransform(translationX: 0, y: 0)
+//        }, completion: nil)
+
     }
     
     func colorForIndex(_ index: Int) -> UIColor {
         let itemCount = tableData.count - 1
         let color = (CGFloat(index) / CGFloat(itemCount)) * 0.6
-        return UIColor(red: 1.0, green: color, blue: 0.0, alpha: 1.0)
+        return UIColor(red: 0.1, green: color, blue: 0.5, alpha: 1.0)
     }
 }
 
