@@ -66,13 +66,15 @@ class ViewController: UICollectionViewController {
         }
         
         let animations = {
-            cell.frame = self.view.bounds
+            cell.frame.origin = CGPoint(x: 0, y: collectionView.contentOffset.y)
+            cell.frame.size = UIScreen.main.bounds.size
         }
         
         let completion: ((_ finished: Bool) -> Void) = { _ in
-            collectionView.isScrollEnabled = false
+//            collectionView.isScrollEnabled = false
         }
-        // TODO: improve animation
+        
+        // FIXME: animation
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [], animations: animations, completion: completion)
     }
     

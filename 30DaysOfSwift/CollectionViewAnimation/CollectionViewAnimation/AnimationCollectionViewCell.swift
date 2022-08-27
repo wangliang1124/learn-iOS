@@ -21,7 +21,7 @@ class AnimationCollectionViewCell: UICollectionViewCell {
         let btn = UIButton()
         btn.setImage(UIImage(named: "Back-icon"), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.layer.zPosition = 1
+//        btn.layer.zPosition = 1
         btn.addTarget(self, action: #selector(backButtonDidTouch), for: .touchUpInside)
         return btn
     }()
@@ -43,9 +43,9 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUI(){
-        addSubview(backBtn)
-        addSubview(imageView)
-        addSubview(textView)
+        self.contentView.addSubview(backBtn)
+        self.contentView.addSubview(imageView)
+        self.contentView.addSubview(textView)
 
         self.backgroundColor = .white
         self.clipsToBounds = true
@@ -76,6 +76,7 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     func handleCellSelected() {
         textView.isScrollEnabled = false
         backBtn.isHidden = false
+        self.contentView.bringSubviewToFront(backBtn)
         self.superview?.bringSubviewToFront(self)
     }
     
