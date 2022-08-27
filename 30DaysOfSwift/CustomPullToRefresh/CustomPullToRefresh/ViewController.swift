@@ -50,7 +50,7 @@ class ViewController: UIViewController {
             refreshControlLabels.centerXAnchor.constraint(equalTo: refreshControl.centerXAnchor),
             refreshControlLabels.centerYAnchor.constraint(equalTo: refreshControl.centerYAnchor),
             refreshControlLabels.leadingAnchor.constraint(equalTo: refreshControl.leadingAnchor, constant: 20),
-            refreshControlLabels.topAnchor.constraint(equalTo: refreshControl.topAnchor, constant: 0)
+//            refreshControlLabels.topAnchor.constraint(equalTo: refreshControl.topAnchor, constant: 0)
         ])
         
         return refreshControl
@@ -83,8 +83,9 @@ class ViewController: UIViewController {
     
     override func loadView() {
         self.view = tableView
+        tableView.refreshControl = refreshControl
         view.backgroundColor = .white
-        view.addSubview(refreshControl)
+//        view.addSubview(refreshControl)
     }
     
     override func viewDidLoad() {
