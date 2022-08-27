@@ -44,6 +44,7 @@ class MainViewController: BaseViewController {
             photo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             photo.widthAnchor.constraint(equalTo: view.widthAnchor),
             toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            toolbar.widthAnchor.constraint(equalTo: view.widthAnchor),
             postButton.centerYAnchor.constraint(equalTo: toolbar.centerYAnchor),
             postButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])

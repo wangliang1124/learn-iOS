@@ -116,6 +116,8 @@ class MenuViewController: BaseViewController {
     func setupUI() {
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissMenu))
+        visualEffectView.addGestureRecognizer(tap)
         visualEffectView.frame = view.bounds
         visualEffectView.backgroundColor = .clear
 
