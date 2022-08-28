@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let shortcutItem = connectionOptions.shortcutItem {
-                // Save it off for later when we become active.
-                savedShortCutItem = shortcutItem
-            }
+            // Save it off for later when we become active.
+            savedShortCutItem = shortcutItem
+        }
     }
     
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

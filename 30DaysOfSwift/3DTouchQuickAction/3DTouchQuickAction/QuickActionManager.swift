@@ -65,8 +65,8 @@ class QuickActionManager {
         while presentedVC?.presentedViewController != nil {
             presentedVC = presentedVC?.presentedViewController
         }
-        
-        if let vc = vc, presentedVC?.isMember(of: vc.classForCoder) == false {
+//        presentedVC?.isMember(of: vc.classForCoder) == false
+        if let vc = vc,  presentedVC?.isKind(of: type(of: vc)) == false {
             presentedVC?.present(vc, animated: true)
         }
         
