@@ -36,10 +36,10 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
+    // 如果不注释， tableView.deleteRows(at: [indexPath], with: .right) 会 crash
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 4
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
@@ -61,6 +61,9 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete", handler: { (_, _, competionHandler)in
             print("Delete button tapped")
+            data.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .right)
+//            tableView.reloadData()
             competionHandler(true)
         })
         delete.backgroundColor = .gray
