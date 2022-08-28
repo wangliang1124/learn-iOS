@@ -40,5 +40,17 @@ class BackTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = tableView.cellForRow(at: indexPath)
         selectedRow?.contentView.backgroundColor = UIColor(red:0.245, green:0.247, blue:0.272, alpha:0.817)
+        var newViewController: UIViewController!
+        switch indexPath.row {
+              case 0:
+                  newViewController = ChannelViewController()
+              case 1:
+                  newViewController = ReadLaterViewController()
+              default:
+                  newViewController = FriendReadViewController()
+              }
+              
+              let navigationController = UINavigationController(rootViewController: newViewController)
+              self.revealViewController().pushFrontViewController(navigationController, animated: true)
     }
 }

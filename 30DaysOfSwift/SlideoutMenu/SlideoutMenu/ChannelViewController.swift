@@ -14,6 +14,7 @@ class ChannelViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.backgroundColor = .white
     }
 
 
