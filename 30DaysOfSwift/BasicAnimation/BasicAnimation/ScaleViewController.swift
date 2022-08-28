@@ -32,6 +32,10 @@ class ScaleViewController: UIViewController {
         UIView.animate(withDuration: 0.8, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
             self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
             self.imageView.alpha = 1
-        }, completion: nil)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.imageView.transform = .identity
+            })
+        })
     }
 }
