@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class ViewController: UITableViewController {
-    var listItems = ["Test1"]
+    var listItems = [String]()
     
     var storedData: [NSManagedObject] = [NSManagedObject]() {
         didSet {
@@ -111,9 +111,23 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { (action, sourceView, completionHandler) in
-            self.listItems.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .right)
-            //            tableView.reloadRows(at: [indexPath], with: .right)
+     
+           
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            managedContext?.delete(self.storedData[indexPath.row])
+            do {
+                try managedContext?.save()
+                
+                self.listItems.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .right)
+//                tableView.reloadRows(at: [indexPath], with: .right)
+            } catch {
+                print("error: delete ")
+            }
+            
+            
             completionHandler(true)
         })
         
