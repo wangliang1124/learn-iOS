@@ -9,18 +9,19 @@ import UIKit
 import CoreData
 
 class ViewController: UITableViewController {
-    var listItems = [String]()
-    
-    var storedData: [NSManagedObject] = [NSManagedObject]() {
-        didSet {
-            print("storedData:\(storedData)")
+    var listItems: [String] {
+        get {
+            var items = [String]()
             for item in storedData {
                 if let value = item.value(forKey: "item") as? String {
-                    listItems.append(value)
+                    items.append(value)
                 }
             }
+            return items
         }
     }
+    
+    var storedData: [NSManagedObject] = [NSManagedObject]()
     
     override func loadView() {
         tableView = UITableView()
@@ -86,7 +87,7 @@ class ViewController: UITableViewController {
         
         do {
             try managedContext.save()
-            self.listItems.append(itemToSave)
+            storedData.append(item)
         } catch {
             print("\(#function):\(error)")
         }
@@ -112,16 +113,14 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { (action, sourceView, completionHandler) in
      
-           
-            
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             managedContext?.delete(self.storedData[indexPath.row])
             do {
                 try managedContext?.save()
                 
-                self.listItems.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .right)
+                self.storedData.remove(at: indexPath.row)
 //                tableView.reloadRows(at: [indexPath], with: .right)
             } catch {
                 print("error: delete ")
