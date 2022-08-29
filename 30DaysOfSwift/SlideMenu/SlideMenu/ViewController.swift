@@ -7,28 +7,9 @@
 
 import UIKit
 
-class ViewController: BaseTableViewController, UIViewControllerTransitioningDelegate {
+class ViewController: BaseTableViewController {
     let reuseIdentifier = "NewsTableViewCell"
-    
-//    var menuTableViewController: MenuTableViewController
-    
-//    override init(style: UITableView.Style) {
-//        super.init(style: style)
-//        let vc = MenuTableViewController()
-//        let menuTransitionManager = MenuTransitionManager()
-//
-//        vc.transitioningDelegate = menuTransitionManager
-//        menuTransitionManager.delegate = self
-//
-//    }
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let menuTableViewController = segue.destination as! MenuTableViewController
-//        menuTableViewController.currentItem = self.title!
-//        menuTableViewController.transitioningDelegate = menuTransitionManager
-//        menuTransitionManager.delegate = self
-//    }
+    let menuTransitionManager = MenuTransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +18,13 @@ class ViewController: BaseTableViewController, UIViewControllerTransitioningDele
         tableView.separatorStyle = .none
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
+      
+        
         navigationItem.title = "Everyday Moments"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-     
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(openMenu))
         
-
-        self.navigationController?.delegate = self
+        menuTransitionManager.delegate = self
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,6 +37,17 @@ class ViewController: BaseTableViewController, UIViewControllerTransitioningDele
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let btn = UIButton()
+        btn.setTitle("menu", for: .normal)
+        btn.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
+        return btn
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,28 +81,27 @@ class ViewController: BaseTableViewController, UIViewControllerTransitioningDele
     
     @objc
     func openMenu() {
-        let vc = MenuTableViewController()
-//        let menuTransitionManager = MenuTransitionManager()
-//
-//        vc.transitioningDelegate = menuTransitionManager
-//        menuTransitionManager.delegate = self
-//        vc.modalPresentationStyle = .custom
-//        self.present(vc, animated: true)
-        navigationController?.pushViewController(vc, animated: true)
+        let menuViewController = MenuTableViewController()
+        menuViewController.transitioningDelegate = menuTransitionManager
+        menuViewController.modalPresentationStyle = .custom
+        self.present(menuViewController, animated: true)
+//        navigationController?.present(menuViewController, animated: true, completion: nil)
+//        navigationController?.pushViewController(menuViewController, animated: true)
     }
 }
 
 extension ViewController: MenuTransitionManagerDelegate {
     func dismiss() {
-//        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
     }
 }
 
-extension ViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let menuTransitionManager = MenuTransitionManager()
-        menuTransitionManager.delegate = self
-        return  menuTransitionManager
-    }
-}
+//extension ViewController: UINavigationControllerDelegate {
+//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//
+//        menuTransitionManager.delegate = self
+//
+//        return menuTransitionManager
+//    }
+//}
