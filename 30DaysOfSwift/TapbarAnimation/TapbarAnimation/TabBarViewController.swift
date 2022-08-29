@@ -39,5 +39,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         print("Should select viewController: \(viewController.title ?? "") ?")
         return true;
     }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Should go here...\(item)")
+    }
 }
 

@@ -47,13 +47,13 @@ class FirstTabViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
         }
         
-        var index = 0
+//        var index = 0
         
-        for cell in cells {
+        for (index, cell) in cells.enumerated() {
             UIView.animate(withDuration: 1.0, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
                 cell.transform = .identity //CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            index += 1
+//            index += 1
         }
     }
     
