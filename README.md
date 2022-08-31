@@ -43,8 +43,13 @@ Android https://github.com/HotBitmapGG/bilibili-android-client
 Swift-Animations https://github.com/YouXianMing/Swift-Animations
 
 
+## Swift Style Guide
+https://google.github.io/swift/#non-documentation-comments
+
 ## 课外参考
 
 https://www.swiftbysundell.com/articles/
 
 https://stackoverflow.com/questions/tagged/swift
+
+
