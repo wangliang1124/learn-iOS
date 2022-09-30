@@ -38,6 +38,9 @@ OC https://github.com/MichaelHuyp/Bilibili_Wuxianda
 
 Android https://github.com/HotBitmapGG/bilibili-android-client 
 
+**V2exOS**
+SwiftUI https://github.com/isaced/V2exOS
+
 **动画**
 
 Swift-Animations https://github.com/YouXianMing/Swift-Animations
