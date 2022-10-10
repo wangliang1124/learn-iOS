@@ -57,10 +57,20 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     private func fetchImage() {
         print("fetch")
         if let url = imageURL {
-            let urlContents = try? Data(contentsOf: url)
-            if let imageData = urlContents {
-                self.image = UIImage(data: imageData)
-            }
+            let task = URLSession.shared.dataTask(with: url, completionHandler: {
+                (data: Data?, _: URLResponse?, error: Error?) in
+                if let imageData = data {
+                    DispatchQueue.main.sync {
+                        self.image = UIImage(data: imageData)
+                    }
+                }
+            })
+            
+            task.resume()
+//            let urlContents = try? Data(contentsOf: url)
+//            if let imageData = urlContents {
+//                self.image = UIImage(data: imageData)
+//            }
         }
     }
     
@@ -68,7 +78,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         print("viewDidLoad")
         if imageURL == nil {
-            imageURL = DemoURLs.stanford
+            // URL(string: "https://images.unsplash.com/photo-1657299170936-0531a116c87c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80")
+            imageURL =  DemoURLs.NASA["Earth"] //DemoURLs.stanford
         }
     }
 }
