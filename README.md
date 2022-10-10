@@ -4,10 +4,10 @@
 ## 阅读
 - [x] Swift语言 https://swiftgg.gitbook.io/swift/
 - [x] Swifter-Swift 开发者必备 Tips (第四版)
-- [ ] iOS Programming The Big Nerd Ranch Guide  
+- [x] iOS Programming The Big Nerd Ranch Guide  
 
 iOS 动画全面总结
-- [ ] https://segmentfault.com/a/1190000038458165
+- [x] https://segmentfault.com/a/1190000038458165
 
 iOS动画全面解析
 - [ ] https://juejin.cn/post/6844903698737397773
