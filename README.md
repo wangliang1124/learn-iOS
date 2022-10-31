@@ -17,6 +17,7 @@ Stanford CS193p - Developing Apps for iOS
 
 ## 练习
 - [x] https://github.com/allenwong/30DaysofSwift
+- [x] https://github.com/elizabethsiegle/30-seconds-of-swift-code
 
 ### TODO
 
