@@ -1,3 +1,38 @@
+import Foundation
+
+func mostFrequent<T: Hashable>(_ arr: [T]) -> T? {
+    var dict = [T: Int]()
+    for element in arr {
+//        print(element)
+        if dict[element] == nil {
+            dict[element] = 1
+        } else {
+            dict[element]! += 1
+        }
+    }
+//    print(dict)
+    return dict.sorted(by: {$0.1 > $1.1}).first?.key
+}
+
+mostFrequent([1, 2, 5, 4, 1, 9, 8, 7, 4, 5, 1, 5, 1]) // 1
+mostFrequent(["a", "b", "c", "a"]) // "a"
+//mostFrequent([]) // nil
+
+func commaSeparated(_ strings: [String]) -> String {
+    return strings.joined(separator: ",")
+}
+
+let strs = ["Foo", "Bar", "Baz", "Qux"]
+commaSeparated(strs) // "Foo, Bar, Baz, Qux"
+
+
+func flatten<T>(arrays: [[T?]]) -> [T] {
+    return arrays.flatMap {$0}.compactMap {$0}
+}
+
+flatten(arrays: [["a","b","c","d"],["e","f","g","y"]]) // ["a", "b", "c", "d", "e", "f", "g", "y"]
+flatten(arrays: [[1,nil,3,4],[5,6,7,8]]) // [1, 3, 4, 5, 6, 7, 8]
+
 func bubbleSort(_ input: [Int]) -> [Int] {
     guard input.count > 1 else {
         return input
