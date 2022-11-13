@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TestAViewController.swift
 //  Orientation
 //
 //  Created by 王亮 on 2022/11/9.
@@ -7,11 +7,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    var contentView: UIView = {
+class TestAViewController: UIViewController {
+    lazy var contentView: UIView = {
        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
+        
+        let button = UIButton()
+        button.setTitle("Open B", for: .normal)
+        button.addTarget(self, action: #selector(openTestB), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        view.addSubview(button)
         return view
     }()
     
@@ -30,7 +38,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = .white
-        self.title = "Test"
+        self.title = "TestA"
         
         
         view.addSubview(contentView)
@@ -47,7 +55,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         print(#function)
         printOrientation()
-        updateOrientation(orientationMask: .landscape)
+//        updateOrientation(orientationMask: .landscape)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -66,9 +74,9 @@ class ViewController: UIViewController {
 //        return false
 //    }
     
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .all
-//    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     func updateOrientation(orientationMask: UIInterfaceOrientationMask) {
         if #available(iOS 16.0, *) {
@@ -97,6 +105,12 @@ class ViewController: UIViewController {
         print("screen width, height: \(UIScreen.main.bounds.width), \(UIScreen.main.bounds.height)")
         print(view.frame)
 //        print("supportedOritation: \(navigationController?.supportedInterfaceOrientations)")
+    }
+    
+    @objc func openTestB(){
+        let vc = TestBViewController()
+        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.present(vc, animated: true)
     }
 }
 

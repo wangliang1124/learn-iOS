@@ -11,6 +11,7 @@ class MyUINavigationController: UINavigationController {
     var orientationMask: UIInterfaceOrientationMask = .portrait
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return orientationMask
+//        return orientationMask
+        return self.topViewController?.supportedInterfaceOrientations ?? .portrait;
     }
 }

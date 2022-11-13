@@ -13,7 +13,7 @@ iOS动画全面解析
 - [ ] https://juejin.cn/post/6844903698737397773
 
 ## 视频课程
-Stanford CS193p - Developing Apps for iOS
+- [x] Stanford CS193p - Developing Apps for iOS
 
 ## 练习
 - [x] https://github.com/allenwong/30DaysofSwift
@@ -23,7 +23,7 @@ Stanford CS193p - Developing Apps for iOS
 
 **Youtube-iOS**
 
-Swift https://github.com/aslanyanhaik/youtube-iOS
+- [ ] Swift https://github.com/aslanyanhaik/youtube-iOS
 
 **高仿微信**
 
@@ -31,7 +31,7 @@ OC https://github.com/gsdios/GSD_WeiXin
 
 OC https://github.com/tbl00c/TLChat
 
-Swift https://github.com/LinXunFeng/LXFWeChat
+- [ ] Swift https://github.com/LinXunFeng/LXFWeChat
 
 **高仿 Bilibili**
 
