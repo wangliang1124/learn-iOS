@@ -13,13 +13,32 @@ class TestAViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
         
-        let button = UIButton()
-        button.setTitle("Open B", for: .normal)
-        button.addTarget(self, action: #selector(openTestB), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
+        let buttonA = UIButton(type: .roundedRect)
+        buttonA.setTitle("Change Orientation", for: .normal)
+        buttonA.addTarget(self, action: #selector(changeOrientation), for: .touchUpInside)
+        buttonA.backgroundColor = .orange
+        buttonA.setTitleColor(.white, for: .normal)
         
-        view.addSubview(button)
+        let buttonB = UIButton()
+        buttonB.setTitle("Open B", for: .normal)
+        buttonB.addTarget(self, action: #selector(openTestB), for: .touchUpInside)
+        buttonB.backgroundColor = .orange
+        
+        let stackView = UIStackView(arrangedSubviews: [buttonA, buttonB])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 20
+//        stackView.backgroundColor = .lightGray
+
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        ])
+        
         return view
     }()
     
@@ -55,7 +74,12 @@ class TestAViewController: UIViewController {
         super.viewDidAppear(animated)
         print(#function)
         printOrientation()
-//        updateOrientation(orientationMask: .landscape)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIDevice.current.setOrientation(orientationMask: self.supportedInterfaceOrientations)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -68,30 +92,21 @@ class TestAViewController: UIViewController {
         printOrientation()
     }
     
-    
-//    ios 16.0 已废弃
-//    override var shouldAutorotate: Bool {
-//        return false
-//    }
+    // iOS 16.0 之后不起作用
+    override var shouldAutorotate: Bool {
+        return true
+    }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return .allButUpsideDown
     }
     
     func updateOrientation(orientationMask: UIInterfaceOrientationMask) {
         if #available(iOS 16.0, *) {
-            DispatchQueue.main.async {
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                (self.navigationController as? MyUINavigationController)?.orientationMask = orientationMask
-                self.setNeedsUpdateOfSupportedInterfaceOrientations()
-                windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientationMask)) { error in
-                    print(error)
-                    print(windowScene?.effectiveGeometry)
-                }
-            }
-        } else {
-            UIDevice.current.setValue(orientationMask.orientation, forKey: "orieantation")
+            (self.navigationController as? MyUINavigationController)?.orientationMask = orientationMask
+            self.setNeedsUpdateOfSupportedInterfaceOrientations()
         }
+        UIDevice.current.setOrientation(orientationMask: orientationMask)
     }
     // 设备旋转方向的时候会触发，刚打开时被触发了两次
     @objc func orientationChanged() {
@@ -107,8 +122,21 @@ class TestAViewController: UIViewController {
 //        print("supportedOritation: \(navigationController?.supportedInterfaceOrientations)")
     }
     
+    @objc func changeOrientation() {
+//        let orientation = UIApplication.shared.statusBarOrientation // 'statusBarOrientation' was deprecated in iOS 13.0:
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let orientation = windowScene?.interfaceOrientation
+//        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+        if orientation == .landscapeLeft || orientation == .landscapeRight {
+            updateOrientation(orientationMask: .portrait)
+        } else {
+            updateOrientation(orientationMask: .landscape)
+        }
+    }
+    
     @objc func openTestB(){
         let vc = TestBViewController()
+        vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
 //        navigationController?.present(vc, animated: true)
     }
@@ -127,6 +155,24 @@ extension UIInterfaceOrientationMask {
             return UIInterfaceOrientation.portraitUpsideDown
         default:
             return UIInterfaceOrientation.unknown
+        }
+    }
+}
+
+extension UIDevice {
+    func setOrientation(orientationMask: UIInterfaceOrientationMask) {
+        if #available(iOS 16.0, *) {
+            DispatchQueue.main.async {
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientationMask)) { error in
+                    print(error)
+                    print(windowScene?.effectiveGeometry)
+                }
+            }
+        } else {
+//            let orientationRawValue = NSNumber(integerLiteral: orientationMask.orientation.rawValue)
+//            UIDevice.current.setValue(orientationRawValue, forKey: "orientation")
+            self.changeInterfaceOrientation(to: orientationMask.orientation)
         }
     }
 }

@@ -10,6 +10,10 @@ import UIKit
 class MyUINavigationController: UINavigationController {
     var orientationMask: UIInterfaceOrientationMask = .portrait
     
+    override var shouldAutorotate: Bool {
+        return self.topViewController?.shouldAutorotate ?? true;
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 //        return orientationMask
         return self.topViewController?.supportedInterfaceOrientations ?? .portrait;
