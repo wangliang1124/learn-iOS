@@ -60,6 +60,6 @@ https://stackoverflow.com/questions/tagged/swift
 ## Awesome Swift
 https://github.com/matteocrippa/awesome-swift
 
-https://github.com/vincent-pradeilles/swift-tips
+- [x] https://github.com/vincent-pradeilles/swift-tips
 
-https://github.com/JohnSundell/SwiftTips
+- [x] https://github.com/JohnSundell/SwiftTips
