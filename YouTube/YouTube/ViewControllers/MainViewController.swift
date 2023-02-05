@@ -17,7 +17,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.isPagingEnabled = true
         collectionView.isDirectionalLockEnabled = true
         return collectionView
     }()
@@ -84,7 +83,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     @objc func scrollViews(notification: Notification) {
         if let info = notification.userInfo as? [String: Int],
         let index = info["index"] {
+            print(index)
+//            self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
+            collectionView.isPagingEnabled = false
+            collectionView.collectionViewLayout.invalidateLayout()
             self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
+            collectionView.isPagingEnabled = true
+            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
