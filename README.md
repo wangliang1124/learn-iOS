@@ -31,7 +31,9 @@ OC https://github.com/gsdios/GSD_WeiXin
 
 OC https://github.com/tbl00c/TLChat
 
-- [ ] Swift https://github.com/LinXunFeng/LXFWeChat
+Swift https://github.com/LinXunFeng/LXFWeChat
+
+Swift https://github.com/hilen/TSWeChat
 
 **高仿 Bilibili**
 
@@ -39,8 +41,13 @@ OC https://github.com/MichaelHuyp/Bilibili_Wuxianda
 
 Android https://github.com/HotBitmapGG/bilibili-android-client 
 
-**V2exOS**
-SwiftUI https://github.com/isaced/V2exOS
+**CVCalendar**
+
+https://github.com/CVCalendar/CVCalendar
+
+**2048**
+
+https://github.com/austinzheng/swift-2048
 
 **动画**
 
