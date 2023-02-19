@@ -23,7 +23,7 @@ iOS动画全面解析
 
 **Youtube-iOS**
 
-- [ ] Swift https://github.com/aslanyanhaik/youtube-iOS
+- [x] Swift https://github.com/aslanyanhaik/youtube-iOS
 
 **高仿微信**
 
