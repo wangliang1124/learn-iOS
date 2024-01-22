@@ -56,6 +56,19 @@ let divide = {(val1:Int,val2:Int)->Int in
 let result = divide(200, 20)
 print (result)
 
+// 函数嵌套
+func outerFunc() -> (()->()) {
+    let outerScope = "outer scope"
+    func innerFunc() {
+        print(outerScope, "in inner func")
+    }
+    // 在外部函数内调用内部嵌套函数，在外部函数以外无法调用它
+    return innerFunc
+}
+// 调用外部函数
+outerFunc()()
+ 
+
 
 let names = ["AT", "AE", "D", "S", "BE"]
 

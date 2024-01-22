@@ -3,7 +3,7 @@ import UIKit
 
 
 // 定义枚举
-enum DaysofaWeek {
+enum DaysofaWeek: String {
     case Sunday
     case Monday
     case TUESDAY
