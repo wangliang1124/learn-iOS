@@ -49,6 +49,9 @@ https://github.com/CVCalendar/CVCalendar
 
 https://github.com/austinzheng/swift-2048
 
+**Wikipedia iOS**
+https://github.com/wikimedia/wikipedia-ios
+
 **动画**
 
 Swift-Animations https://github.com/YouXianMing/Swift-Animations
